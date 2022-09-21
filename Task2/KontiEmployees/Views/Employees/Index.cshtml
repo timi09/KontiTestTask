@@ -1,0 +1,72 @@
+﻿@model KontiEmployees.ViewModels.AvaibleTypesWithEmployeesList
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Добавить сотрудника</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="align-middle">
+                ФИО
+            </th>
+            <th class ="align-middle">
+                Телефон
+            </th>
+            <th class="align-middle">
+                E-mail
+            </th>
+            <th class="align-middle">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Тип сотрудника</button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="/Employees">Все</a>
+                    @foreach (var item in Model.AvaibleEmployeeTypes)
+                    {
+                        <a class="dropdown-item" href="/Employees?type=@item.Title">@item.Title</a>
+                    }
+                </div>
+            </th>
+            <th class="align-middle">
+                Адрес
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Employees)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress.Country),
+                @Html.DisplayFor(modelItem => item.Adress.City),
+                @Html.DisplayFor(modelItem => item.Adress.Street), 
+                д. @Html.DisplayFor(modelItem => item.Adress.HouseNum),
+                кв. @Html.DisplayFor(modelItem => item.Adress.ApartmentNum)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a>  
+                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <a href="@Url.Action("ExportToExcel","Employees")">Загрузить Excel</a>
+    <img src="Images/exelfile.png" alt="exel file" />
+</div>  

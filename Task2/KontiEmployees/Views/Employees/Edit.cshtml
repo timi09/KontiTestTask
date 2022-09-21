@@ -1,0 +1,77 @@
+﻿@model KontiEmployees.ViewModels.AvaibleTypesWithEmployee
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Редктировать запись сотрудника</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Employee.FullName" class="control-label">ФИО</label>
+                <input asp-for="Employee.FullName" class="form-control" />
+                <span asp-validation-for="Employee.FullName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.PhoneNumber" class="control-label">Телефон</label>
+                <input asp-for="Employee.PhoneNumber" class="form-control" />
+                <span asp-validation-for="Employee.PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Email" class="control-label">E-mail</label>
+                <input asp-for="Employee.Email" class="form-control" />
+                <span asp-validation-for="Employee.Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Type.Title" class="control-label">Тип сотрудника</label>
+                <select asp-for="Employee.Type.Title" class="form-control">
+                    @foreach (var item in Model.AvaibleEmployeeTypes)
+                    {
+                        <option value="@item.Title">@item.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="Employee.Type.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Adress.Country" class="control-label">Страна</label>
+                <input asp-for="Employee.Adress.Country" class="form-control" />
+                <span asp-validation-for="Employee.Adress.Country" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Adress.City" class="control-label">Город</label>
+                <input asp-for="Employee.Adress.City" class="form-control" />
+                <span asp-validation-for="Employee.Adress.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Adress.Street" class="control-label">Улица</label>
+                <input asp-for="Employee.Adress.Street" class="form-control" />
+                <span asp-validation-for="Employee.Adress.Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Adress.HouseNum" class="control-label">Номер дома</label>
+                <input asp-for="Employee.Adress.HouseNum" class="form-control" type="number" />
+                <span asp-validation-for="Employee.Adress.HouseNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Employee.Adress.ApartmentNum" class="control-label">Номер квартиры</label>
+                <input asp-for="Employee.Adress.ApartmentNum" class="form-control" type="number" />
+                <span asp-validation-for="Employee.Adress.ApartmentNum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Сохранить" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Назад к списку</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
